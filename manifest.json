@@ -1,0 +1,29 @@
+{
+    "manifest_version": 2,
+    "name": "Open Tab Reloader",
+    "version": "1.0",
+
+    "description": "Minimum requirements to reload tabs automatically",
+    "homepage_url": "https://github.com/kokhong1995/number-converter-web-extension.git",
+    "icons": {
+        "48": "icons/open-tab-reloader-48.png"
+    },
+
+    "permissions": ["storage", "tabs"],
+
+    "browser_action": {
+        "default_icon": "icons/open-tab-reloader-32.png",
+        "default_title": "Open Tab Reloader",
+        "default_popup": "popup/main.html"
+    },
+
+    "background": {
+        "scripts": ["popup/background.js"]
+    },
+
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "opentabreloader@heansolutions.com"
+        }
+    }
+}

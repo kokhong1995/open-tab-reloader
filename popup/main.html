@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        label {
+            font-size: small
+        }
+    </style>
+</head>
+
+<body style="height:auto;width:350px;text-align:center">
+    <span width="50%">Interval</span>
+    <hr>
+    <div style="display:flex;width:100%;height:auto">
+        <div style="width:23.75%">
+            <input id="days" name="days" type="number" min="0" value="0" style="width:70%;text-align:center">
+            <label for="days">Days</label>
+        </div>
+        &nbsp;&nbsp;
+        <div style="width:23.75%">
+            <input id="hours" name="hours" type="number" min="0" max="59" value="0" style="width:70%;text-align:center">
+            <label for="hours">Hours</label>
+        </div>
+        &nbsp;&nbsp;
+        <div style="width:23.75%">
+            <input id="minutes" name="minutes" type="number" min="0" max="59" value="0"
+                style="width:70%;text-align:center">
+            <label for="minutes">Minutes</label>
+        </div>
+        &nbsp;&nbsp;
+        <div style="width:23.75%">
+            <input id="seconds" name="seconds" type="number" min="0" max="59" value="5"
+                style="width:70%;text-align:center">
+            <label for="seconds">Seconds</label>
+        </div>
+    </div>
+    <hr>
+    <input type="checkbox" id="bypass-cache" name="bypass-cache">
+    <label for="bypass-cache">Bypass Cache</label>
+    <hr>
+    <button id="start" style="width:40%">Start</button>
+    <button id="stop" style="width:40%" disabled>Stop</button>
+    <script src="main.js"></script>
+</body>
+
+</html>
