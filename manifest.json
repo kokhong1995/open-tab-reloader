@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Open Tab Reloader",
-    "version": "1.0",
+    "version": "1.1",
 
     "description": "Open Tab Reloader (OTR) is an open-source add-on project designed for running on the Firefox web browser, allowing users to reload tabs with specific time-intervals automatically.",
     "homepage_url": "https://github.com/kokhong1995/open-tab-reloader",
