@@ -3,5 +3,5 @@ The intention of this open-source project is to provide a simple solution for us
 
 Features:
 - Reload tabs with custom time-intervals (by providing days, hours, minutes, and seconds). 
-- Reload tabs with bypassing cache (optional). 
-- Minimum permissions for achieving goals (storage: for storing user's preferences, tabs: for managing tabs).
+- Reload tabs by bypassing cache (optional). 
+- Use minimum permissions for achieving goals (storage: for storing user's preferences, tabs: for managing tabs).
