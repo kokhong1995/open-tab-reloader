@@ -3,8 +3,8 @@
     "name": "Open Tab Reloader",
     "version": "1.0",
 
-    "description": "Minimum requirements to reload tabs automatically",
-    "homepage_url": "https://github.com/kokhong1995/number-converter-web-extension.git",
+    "description": "Open Tab Reloader (OTR) is an open-source add-on project designed for running on the Firefox web browser, allowing users to reload tabs with specific time-intervals automatically.",
+    "homepage_url": "https://github.com/kokhong1995/open-tab-reloader",
     "icons": {
         "48": "icons/open-tab-reloader-48.png"
     },
