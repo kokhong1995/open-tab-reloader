@@ -31,7 +31,7 @@ function onTabFound(item) {
         let tabId = values[0]['id'];
 
         clearTimeout(requests[tabId]);
-        browser.storage.sync.remove('t' + tabId).then(onSuccess, onError);
+        browser.storage.local.remove('t' + tabId).then(onSuccess, onError);
     }
 }
 
