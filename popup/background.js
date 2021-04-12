@@ -6,25 +6,55 @@
 var requests = [];
 
 /**
- * Cancels the timeout request if the tab was closed. 
- * @param {number} error 
+ * This function will be called if the operation was successful. 
  */
-function onError(error) {
-    // console.log(error);      // For debugging only.
-    let tabId = String(error).replace(/[^0-9]/g, '');
-
-    clearTimeout(requests[tabId]);
+ function onSuccess() {
+    // console.log('The operation is successful.');     // For debugging only. 
 }
 
 /**
- * Calls setTimeout function for reloading the tab. 
+ * This function will be called if the operation was failed. 
+ * @param {*} error 
+ */
+function onError(error) {
+    // console.log(error);      // For debugging only.
+}
+
+/**
+ * Cancels the timeout request and remove saved preferences. 
+ * @param {object} item 
+ */
+function onTabFound(item) {
+    if (Object.keys(item).length != 0) {
+        // Gets tab ID. 
+        let values = Object.values(item);
+        let tabId = values[0]['id'];
+
+        clearTimeout(requests[tabId]);
+        browser.storage.sync.remove('t' + tabId).then(onSuccess, onError);
+    }
+}
+
+/**
+ * Checks if the saved preferences of the tab exist. 
+ * @param {number} tabId 
+ * @param {object} removeInfo 
+ */
+function handleRemoved(tabId, removeInfo) {
+    browser.storage.local.get('t' + tabId).then(onTabFound, onError);
+}
+
+/**
+ * Calls setTimeout function for reloading the tab, also adds listener for handling closed tab. 
  * @param {number} tabId 
  * @param {number} interval 
  * @param {number} isBypassCacheEnabled 
  */
-function onSuccess(tabId, interval, isBypassCacheEnabled) {
+function onReloadSuccess(tabId, interval, isBypassCacheEnabled) {
     requests[tabId] = setTimeout(
         function () { reloadTab(tabId, interval, isBypassCacheEnabled) }, interval);
+    
+    browser.tabs.onRemoved.addListener(handleRemoved);
 }
 
 /**
@@ -37,12 +67,12 @@ function reloadTab(tabId, interval, isBypassCacheEnabled) {
     if (isBypassCacheEnabled == 1) {
         browser.tabs
             .reload(tabId, { bypassCache: true })
-            .then(onSuccess(tabId, interval, isBypassCacheEnabled), onError);
+            .then(onReloadSuccess(tabId, interval, isBypassCacheEnabled), onError);
     }
     else {
         browser.tabs
             .reload(tabId)
-            .then(onSuccess(tabId, interval, isBypassCacheEnabled), onError);
+            .then(onReloadSuccess(tabId, interval, isBypassCacheEnabled), onError);
     }
 }
 
