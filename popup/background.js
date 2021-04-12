@@ -45,7 +45,7 @@ function handleRemoved(tabId, removeInfo) {
 }
 
 /**
- * Calls setTimeout function for reloading the tab, also adds listener for handling closed tab. 
+ * Calls setTimeout function for reloading the tab. 
  * @param {number} tabId 
  * @param {number} interval 
  * @param {number} isBypassCacheEnabled 
@@ -53,8 +53,6 @@ function handleRemoved(tabId, removeInfo) {
 function onReloadSuccess(tabId, interval, isBypassCacheEnabled) {
     requests[tabId] = setTimeout(
         function () { reloadTab(tabId, interval, isBypassCacheEnabled) }, interval);
-    
-    browser.tabs.onRemoved.addListener(handleRemoved);
 }
 
 /**
@@ -78,6 +76,7 @@ function reloadTab(tabId, interval, isBypassCacheEnabled) {
 
 /**
  * Receives tab details, start/stop reloading the tab then. 
+ * Adds a listener for handling closed tab if the tab reloading task is active. 
  * Finally, notifies main.js to update GUI. 
  * @param {object} tab 
  * @param {*} sender 
@@ -93,6 +92,8 @@ function listener(tab, sender, sendResponse) {
         let milliseconds = (daysInSeconds + hoursInSeconds + minutesInSeconds + seconds) * 1000;
 
         reloadTab(tab.id, milliseconds, tab.isBypassCacheEnabled);
+
+        browser.tabs.onRemoved.addListener(handleRemoved);
     }
     else {
         clearTimeout(requests[tab.id]);
